@@ -70,37 +70,49 @@ inquirer
   .then((data) => {
   console.log(data);
   const fileName = `${data.title.toLowerCase().split(' ').join('')}.md`;
-  writeToFile(fileName, data);
+ writeToFile(fileName, data);
   });
 
 // TODO: Create a function to write README file
- function writeToFile(fileName, {github, email, description, liscence, installation,tests, usage, contributing } = data) {
-    const preview = `<h1>Description</h1>
-     <p>${description}</p>
-      <h1>Table of Contents</h1>
-      <h1>Installation</h1>
-      <p>${installation}</p>
-      <h1>Usage</h1>
-      <p>${usage}</p>
-      <h1>Liscence</h1>
-      <p>${liscence}</p>
-      <h1>Contributing</h1>
-      <p>${contributing}</p>
-      <h1>Tests</h1>
-      <p>${tests}</p>
-      <h1>Questions</h1>
-     <p>If you have any questions about the repo, open an issue or contact me directly at ${email}. You may see more of my work at URL with ${github}`;
-     
-
+ function writeToFile(fileName, { github, email, description, liscence, installation,tests, usage, contributing } = data) {
+    if (liscence === 'MIT') {
+        badge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+    } else if (liscence === 'APACHE 2.0')  {
+        badge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
+    } else if (liscence === 'GPL 3.0') {
+        badge = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)';
+    } else {
+        badge = '';
+    } 
     
-
+    
+    const preview =  badge +
+    `<h1>Description</h1>
+    <p>${description}</p>
+     <h1>Table of Contents</h1>
+     <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#usage">Usage</a></li>
+        <li><a href="#license">Liscence</a></li>
+        <li><a href="#contributing">Contributing</a></li>
+        <li><a href="#tests">Tests</a></li>
+        <li><a href="#questions">Questions</a></li>
+     </ul>
+     <h1 id="installation">Installation</h1>
+     <p>${installation}</p>
+     <h1 id="usage">Usage</h1>
+     <p>${usage}</p>
+     <h1 id="license">Liscence</h1>
+     <p>${liscence}</p>
+     <h1 id="contributing">Contributing</h1>
+     <p>${contributing}</p>
+     <h1 id="tests">Tests</h1>
+     <p>${tests}</p>
+     <h1 id="questions">Questions</h1>
+    <p>If you have any questions about the repo, open an issue or contact me directly at ${email}. You may see more of my work at <a href=https://github.com/${github}>${github}</a>`;
+  
 
 fs.writeFile(fileName, preview, (err) =>
   err ? console.error(err) : console.log('File created!')
 );
  }
-// // TODO: Create a function to initialize app
-// function init() {}
-
-// // Function call to initialize app
-// init();
