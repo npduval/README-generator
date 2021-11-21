@@ -1,6 +1,6 @@
 # README-generator
 
-This application will gather pertimant details regarding your future projects and create a high quality README to save you time.
+This application will gather pertimant details regarding your future projects and create a high quality README file to save you time and create efficiency.
 
 ![image](https://user-images.githubusercontent.com/87501948/141697688-ef1ee733-3f61-494d-8c14-a19bbb822c43.png)
 
